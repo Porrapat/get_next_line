@@ -17,44 +17,31 @@
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	
+	char	*buff;
+	int		ret;
+
+	ret = 0;
+	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	ret = read(fd, buff, BUFFER_SIZE);
+	buff[BUFFER_SIZE] = '\0';
+	return (buff);
 }
 
 int	main(void)
 {
 	int		fd;
-	int		ret;
-	char	*buff;
 
 	fd = 0;
 	fd = open("files/mypao", O_RDWR);
-	ret = 0;
-	if(fd == -1)
+
+	if(fd != -1)
 	{
-
+		printf("Line is %s\n", get_next_line(fd));
+		// free(buff);
 	}
-	else
-	{
-		printf("%d\n", fd);
-		buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-		ret = read(fd, buff, BUFFER_SIZE);
-		buff[BUFFER_SIZE] = '\0';
+	// printf("%d\n", fd);
 
-		printf("ret is %d\n", ret);
-		printf("Buff is %s\n", buff);
-
-		ret = read(fd, buff, BUFFER_SIZE);
-		buff[BUFFER_SIZE] = '\0';
-
-		printf("ret is %d\n", ret);
-		printf("Buff is %s\n", buff);
-
-		free(buff);
-	}
-	printf("%d\n", fd);
-
-	// char *get_next_line(int fd);
 	return (0);
 }

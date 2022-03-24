@@ -42,6 +42,7 @@ char	*get_next_line(int fd)
 // ft_strlen()
 int	main(void)
 {
+	// Story 1
 	// int		fd;
 	// char	*result;
 	// int		round;
@@ -59,24 +60,44 @@ int	main(void)
 	// 	}
 	// }
 
-	int ret = 0;
-	const char *src = "def";
-	char *dst;
 
-	dst = (char *)malloc(4);
-	dst[0] = 'a';
-	dst[1] = 'b';
-	dst[2] = 'c';
-	dst[3] = '\0';
+	// // Story 2
+	// int ret = 0;
+	// const char *src = "def";
+	// char *dst;
 
-	int old_len = ft_strlen(dst);
-	dst = ft_realloc(dst, ft_strlen(src) + ft_strlen(dst) + 1);
-	dst[old_len] = '\0';
+	// dst = (char *)malloc(4);
+	// dst[0] = 'a';
+	// dst[1] = 'b';
+	// dst[2] = 'c';
+	// dst[3] = '\0';
+
+	// int old_len = ft_strlen(dst);
+	// dst = ft_realloc(dst, ft_strlen(src) + ft_strlen(dst) + 1);
+	// dst[old_len] = '\0';
 	
-	ret = ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
-	printf("dst is %s\n", dst);
-	printf("ret is %d\n", ret);
-	free(dst);
+	// ret = ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
+	// printf("dst is %s\n", dst);
+	// printf("ret is %d\n", ret);
+	// free(dst);
+
+	// // Story 3
+	// char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+
+	const char *myhay = "abcde\ndef\nghijk";
+
+	// char *myhay;
+	// myhay = (char *)malloc(16);
+	// ft_memcpy(myhay, "abcde\ndef\nghijk", 16);
+
+	char *temp;
+
+	printf("%s---", myhay);
+
+	temp = ft_strnstr(myhay, "\n", ft_strlen(myhay));
+	
+	printf("%s", temp);
+	// free(myhay);
 
 	return (0);
 }

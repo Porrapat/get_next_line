@@ -14,18 +14,19 @@
 // gcc -Wall -Wextra -Werror get_next_line.c
 // gcc -Wall -Wextra -Werror get_next_line.c && ./a.out && rm -rf a.out
 // gcc get_next_line.c && ./a.out && rm -rf a.out
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 
-#define BUFFER_SIZE 10
+#include "get_next_line.h"
+
+char *get_next_line(int fd)
+{
+	
+}
 
 int	main(void)
 {
-	int fd;
-	int ret;
-	char *buff;
+	int		fd;
+	int		ret;
+	char	*buff;
 
 	fd = 0;
 	fd = open("files/mypao", O_RDWR);

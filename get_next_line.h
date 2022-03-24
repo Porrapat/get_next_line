@@ -23,6 +23,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
-char	*get_next_line(int fd);
+size_t		ft_strlen(const char *s);
+char		*get_next_line(int fd);
 
 #endif

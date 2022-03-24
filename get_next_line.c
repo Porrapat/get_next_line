@@ -58,14 +58,25 @@ int	main(void)
 	// 		free(result);
 	// 	}
 	// }
+
 	int ret = 0;
-	char *src = "def";
-	char *dst = "abc";
+	const char *src = "def";
+	char *dst;
 
-	ret = ft_strlcat(dst, src, 7);
+	dst = (char *)malloc(4);
+	dst[0] = 'a';
+	dst[1] = 'b';
+	dst[2] = 'c';
+	dst[3] = '\0';
 
+	int old_len = ft_strlen(dst);
+	dst = ft_realloc(dst, ft_strlen(src) + ft_strlen(dst) + 1);
+	dst[old_len] = '\0';
+	
+	ret = ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
 	printf("dst is %s\n", dst);
 	printf("ret is %d\n", ret);
+	free(dst);
 
 	return (0);
 }

@@ -24,7 +24,10 @@
 # endif
 
 size_t		ft_strlen(const char *s);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+char		*ft_realloc(char *s, size_t n);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 char		*get_next_line(int fd);
 #endif

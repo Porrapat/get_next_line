@@ -42,21 +42,30 @@ char	*get_next_line(int fd)
 // ft_strlen()
 int	main(void)
 {
-	int		fd;
-	char	*result;
-	int		round;
+	// int		fd;
+	// char	*result;
+	// int		round;
 
-	fd = 0;
-	fd = open("files/mypao", O_RDWR);
+	// fd = 0;
+	// fd = open("files/mypao", O_RDWR);
 
-	round = 1;
-	if(fd != -1)
-	{
-		while(result = get_next_line(fd))
-		{
-			printf("%d. Line is %s*", round++, result);
-			free(result);
-		}
-	}
+	// round = 1;
+	// if(fd != -1)
+	// {
+	// 	while(result = get_next_line(fd))
+	// 	{
+	// 		printf("%d. Line is %s*", round++, result);
+	// 		free(result);
+	// 	}
+	// }
+	int ret = 0;
+	char *src = "def";
+	char *dst = "abc";
+
+	ret = ft_strlcat(dst, src, 7);
+
+	printf("dst is %s\n", dst);
+	printf("ret is %d\n", ret);
+
 	return (0);
 }

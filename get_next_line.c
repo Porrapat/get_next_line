@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// norminette
-// gcc -Wall -Wextra -Werror get_next_line.c
-// gcc -Wall -Wextra -Werror get_next_line.c && ./a.out && rm -rf a.out
-// gcc get_next_line.c && ./a.out && rm -rf a.out
-
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
@@ -38,7 +33,9 @@ int	main(void)
 
 	if(fd != -1)
 	{
-		printf("Line is %s\n", get_next_line(fd));
+		printf("1. Line is %s", get_next_line(fd));
+		printf("2. Line is %s", get_next_line(fd));
+		printf("3. Line is %s", get_next_line(fd));
 		// free(buff);
 	}
 	// printf("%d\n", fd);

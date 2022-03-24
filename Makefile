@@ -8,5 +8,8 @@ normh:
 run:
 	gcc get_next_line.c && ./a.out && rm -rf a.out
 
+runbuffer:
+	gcc -D BUFFER_SIZE=6 get_next_line.c && ./a.out && rm -rf a.out
+
 runstrict:
 	gcc -Wall -Wextra -Werror get_next_line.c && ./a.out && rm -rf a.out

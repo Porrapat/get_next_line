@@ -30,6 +30,16 @@ char	*get_next_line(int fd)
 	return (buff);
 }
 
+// 1. Read แล้วต่อ String เรื่อยๆ จนกว่าเจอ \n แล้ว Return ออกอันนึง จากนั้น Read ต่ออีก
+// 1.1 เราต้องมีฟังก์ชันที่ใช้อะไรบ้าง
+
+// ft_strchr ---> X ไม่ใช้
+// ft_substr
+// ft_strlcat ต่อสตริง เอาความยาวจากสตริง Len ทั้งคู่มาต่อกัน
+// ft_strjoin ต่อสตริง ---> x ไม่ใช้
+// char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+
+// ft_strlen()
 int	main(void)
 {
 	int		fd;
@@ -42,38 +52,11 @@ int	main(void)
 	round = 1;
 	if(fd != -1)
 	{
-		// result = get_next_line(fd);
-		// if(result == NULL)
-		// 	return (0);
-		// printf("1. Line is %s", result);
-		// free(result);
-
-		// result = get_next_line(fd);
-		// if(result == NULL)
-		// 	return (0);
-		// printf("2. Line is %s", result);
-		// free(result);
-
-		// result = get_next_line(fd);
-		// if(result == NULL)
-		// 	return (0);
-		// printf("3. Line is %s", result);
-		// free(result);
-
 		while(result = get_next_line(fd))
 		{
-			printf("%d. Line is %s", round++, result);
+			printf("%d. Line is %s*", round++, result);
 			free(result);
 		}
-
-
-		// printf("2. Line is %s", get_next_line(fd));
-		// printf("3. Line is %s", get_next_line(fd));
-		// free(buff);
-
-		// printf("ft strlen is %ld\n", ft_strlen("Hello"));
 	}
-	// printf("%d\n", fd);
-
 	return (0);
 }

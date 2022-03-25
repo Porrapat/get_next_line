@@ -26,14 +26,33 @@ char	*get_next_line(int fd)
 		free(buff);
 		return (NULL);
 	}
-	buff[BUFFER_SIZE] = '\0';
+	buff[return_bytes + 1] = '\0';
+
+	printf("--- In get_next_line function\n");
+	printf("ft_strlen buff is %ld\n", ft_strlen(buff));
+
+
+	
 	return (buff);
 }
 
 int	main(void)
 {
+	int		fd;
+	int		round;
+	char	*result;
 
-
+	fd = open("files/mypao", O_RDWR);
+	round = 1;
+	if(fd != -1)
+	{
+		while(result = get_next_line(fd))
+		{
+			printf("%d. Line is %s*\n", round++, result);
+			free(result);
+		}
+	}
+	close(fd);
 	return (0);
 }
 

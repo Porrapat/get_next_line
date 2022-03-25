@@ -15,6 +15,9 @@ runstrict:
 	gcc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c && ./a.out && rm -rf a.out
 
 mem:
+	gcc -g -D BUFFER_SIZE=2 get_next_line.c get_next_line_utils.c && valgrind --leak-check=yes -q ./a.out
+
+mem3:
 	gcc -g -Wall -Wextra -Werror -D BUFFER_SIZE=2 get_next_line.c get_next_line_utils.c && valgrind --leak-check=yes -q ./a.out
 
 mem2:

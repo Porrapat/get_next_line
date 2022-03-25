@@ -47,17 +47,23 @@ char	*get_next_line(int fd)
 			ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
 
 			free(buff);
+			buff = NULL;
 			return (to_return_str);
 		}
 	}
 
 	free(buff);
+	buff = NULL;
 	if(read_return == -1)
 		return (NULL);
 	if(read_return == 0)
 	{
 		if(main_str)
+		{
+			free(main_str);
+			main_str = NULL;
 			return (NULL);
+		}
 		old_len = ft_strlen(main_str);
 		if(old_len > 0)
 		{
@@ -65,56 +71,64 @@ char	*get_next_line(int fd)
 			ft_memcpy(to_return_str, main_str, old_len);
 			to_return_str[old_len] = '\0';
 			free(main_str);
+			main_str = NULL;
 			return (to_return_str);
 		}
 		else
 		{
-			// free(main_str);
 			return (NULL);
 		}
 	}
-	if(ft_strlen(main_str) > 0)
-		return (main_str);
-	else
-	{
-		free(main_str);
-		return (NULL);
-	}
+	return (NULL);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	int		round;
-// 	char	*result;
+int	main(void)
+{
+	int		fd;
+	int		round;
+	char	*result;
 
-// 	// fd = open("files/mypao", O_RDWR);
-// 	// fd = open("files/empty", O_RDWR);
-// 	// fd = open("files/nl", O_RDWR);
-// 	// fd = open("files/41_no_nl", O_RDWR);
-// 	fd = open("files/41_with_nl", O_RDWR);
-// 	round = 1;
-// 	printf("fd is %d\n", fd);
-// 	if(fd != -1)
-// 	{
-// 		while((result = get_next_line(fd)))
-// 		{
-// 			printf("%d. Line is %s*\n", round++, result);
-// 			free(result);
-// 		}
-// 	}
-// 	// if(fd != -1)
-// 	// {
-// 	// 	result = get_next_line(fd);
-// 	// 	printf("%d. Line is %s*\n", round++, result);
-// 	// 	free(result);
-// 	// }
-// 	// if(fd != -1)
-// 	// {
-// 	// 	result = get_next_line(fd);
-// 	// 	printf("%d. Line is %s*\n", round++, result);
-// 	// 	free(result);
-// 	// }
-// 	close(fd);
-// 	return (0);
-// }
+	// fd = open("files/mypao", O_RDWR);
+	// fd = open("files/empty", O_RDWR);
+	fd = open("files/nl", O_RDWR);
+	// fd = open("files/41_no_nl", O_RDWR);
+	// fd = open("files/41_with_nl", O_RDWR);
+	round = 1;
+	printf("fd is %d\n", fd);
+	if(fd != -1)
+	{
+		while((result = get_next_line(fd)))
+		{
+			printf("%d. Line is %s*\n", round++, result);
+			free(result);
+			result = NULL;
+		}
+		if(result)
+		{
+			free(result);
+			result = NULL;
+		}
+	}
+	// if(fd != -1)
+	// {
+	// 	result = get_next_line(fd);
+	// 	printf("%d. Line is %s*\n", round++, result);
+	// 	if(result)
+	// 	{
+	// 		free(result);
+	// 		result = NULL;
+	// 	}
+	// }
+	// if(fd != -1)
+	// {
+	// 	result = get_next_line(fd);
+	// 	printf("%d. Line is %s*\n", round++, result);
+	// 	if(result != NULL)
+	// 	{
+	// 		free(result);
+	// 		result = NULL;
+	// 	}
+	// }
+	close(fd);
+	return (0);
+}

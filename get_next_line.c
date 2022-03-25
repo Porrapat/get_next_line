@@ -46,11 +46,9 @@ char	*get_next_line(int fd)
 			to_return_str[new_str - main_str + 1] = '\0';
 			ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
 
+			free(buff);
 			return (to_return_str);
 		}
-		// else
-			// printf("No Found newline\n");
-		// printf("-----\n");
 	}
 
 	free(buff);
@@ -79,6 +77,12 @@ int	main(void)
 			free(result);
 		}
 	}
+	// if(fd != -1)
+	// {
+	// 	result = get_next_line(fd);
+	// 	printf("%d. Line is %s*\n", round++, result);
+	// 	free(result);
+	// }
 	close(fd);
 	return (0);
 }

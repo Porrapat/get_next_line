@@ -33,7 +33,7 @@ char	*get_next_line(int fd)
 		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
 
 		printf("main_str is %s\n", main_str);
-		if(ft_strnstr(main_str, "\n", ft_strlen(main_str)))
+		if(main_str = ft_strnstr(main_str, "\n", ft_strlen(main_str)))
 			printf("Found newline\n");
 		else
 			printf("No Found newline\n");

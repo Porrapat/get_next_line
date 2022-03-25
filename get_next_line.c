@@ -24,7 +24,7 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 	{
 		buff[*read_return] = 0;
 		old_len = ft_strlen(main_str);
-		main_str = ft_realloc(main_str, *read_return + ft_strlen(main_str) + 1);
+		main_str = ft_realloc(main_str, *read_return + old_len + 1);
 		main_str[old_len] = '\0';
 		ft_strlcat(main_str, buff, *read_return + old_len + 1);
 		new_str = ft_strnstr(main_str, "\n", old_len + 1);
@@ -35,10 +35,31 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 			in_to_return_str[new_str - main_str + 1] = '\0';
 			ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
 			free(buff);
-			buff = NULL;
 			return (in_to_return_str);
 		}
 		*read_return = read(fd, buff, BUFFER_SIZE);
+	}
+}
+
+char	*check_for_read_return(int *read_return)
+{
+	static char	*main_str;
+	char		*new_new_str;
+
+	if (*read_return == -1)
+		return (NULL);
+	if (*read_return == 0)
+	{
+		if (ft_strlen(main_str) > 0)
+		{
+			new_new_str = malloc(ft_strlen(main_str) + 1);
+			ft_memcpy(new_new_str, main_str, ft_strlen(main_str));
+			new_new_str[ft_strlen(main_str)] = '\0';
+			free(main_str);
+			return (new_new_str);
+		}
+		else
+			return (NULL);
 	}
 }
 
@@ -56,25 +77,13 @@ char	*get_next_line_main_logic(int fd)
 	else
 	{
 		free(buff);
-		buff = NULL;
 		return (NULL);
 	}
-	if (read_return == -1)
+	new_str = check_for_read_return(&read_return);
+	if (new_str)
+		return (new_str);
+	else
 		return (NULL);
-	if (read_return == 0)
-	{
-		if (ft_strlen(main_str) > 0)
-		{
-			new_str = malloc(ft_strlen(main_str) + 1);
-			ft_memcpy(new_str, main_str, ft_strlen(main_str));
-			new_str[ft_strlen(main_str)] = '\0';
-			free(main_str);
-			main_str = NULL;
-			return (new_str);
-		}
-		else
-			return (NULL);
-	}
 }
 
 char	*get_next_line(int fd)

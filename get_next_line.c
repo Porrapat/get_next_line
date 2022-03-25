@@ -29,17 +29,16 @@ char	*get_next_line(int fd)
 		main_str = (char *)malloc(1);
 		main_str[0] = '\0';
 	}
-	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	read_return = 0;
 	while((read_return = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
-		buff[BUFFER_SIZE] = '\0';
+		buff[read_return] = 0;
 		old_len = ft_strlen(main_str);
-		main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
-		
+		main_str = ft_realloc(main_str, read_return + ft_strlen(main_str) + 1);
 		main_str[old_len] = '\0';
-		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
-		if((new_str = ft_strnstr(main_str, "\n", ft_strlen(main_str))))
+		ft_strlcat(main_str, buff, read_return + old_len + 1);
+		if((new_str = ft_strnstr(main_str, "\n", old_len)))
 		{
 			to_return_str = malloc(new_str - main_str + 2);
 			ft_memcpy(to_return_str, main_str, new_str - main_str + 1);
@@ -95,40 +94,40 @@ int	main(void)
 	// fd = open("files/41_with_nl", O_RDWR);
 	round = 1;
 	printf("fd is %d\n", fd);
-	if(fd != -1)
-	{
-		while((result = get_next_line(fd)))
-		{
-			printf("%d. Line is %s*\n", round++, result);
-			free(result);
-			result = NULL;
-		}
-		if(result)
-		{
-			free(result);
-			result = NULL;
-		}
-	}
 	// if(fd != -1)
 	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
+	// 	while((result = get_next_line(fd)))
+	// 	{
+	// 		printf("%d. Line is %s*\n", round++, result);
+	// 		free(result);
+	// 		result = NULL;
+	// 	}
 	// 	if(result)
 	// 	{
 	// 		free(result);
 	// 		result = NULL;
 	// 	}
 	// }
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	if(result != NULL)
-	// 	{
-	// 		free(result);
-	// 		result = NULL;
-	// 	}
-	// }
+	if(fd != -1)
+	{
+		result = get_next_line(fd);
+		printf("%d. Line is %s*\n", round++, result);
+		if(result)
+		{
+			free(result);
+			result = NULL;
+		}
+	}
+	if(fd != -1)
+	{
+		result = get_next_line(fd);
+		printf("%d. Line is %s*\n", round++, result);
+		if(result != NULL)
+		{
+			free(result);
+			result = NULL;
+		}
+	}
 	close(fd);
 	return (0);
 }

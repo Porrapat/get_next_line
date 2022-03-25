@@ -20,7 +20,10 @@ char	*get_next_line(int fd)
 	int			old_len;
 	char		*new_str;
 	char		*to_return_str;
+	int			read_return;
 
+	if(fd == -1 || BUFFER_SIZE == 0)
+		return (NULL);
 	if(!main_str) 
 	{
 		main_str = (char *)malloc(1);
@@ -28,7 +31,7 @@ char	*get_next_line(int fd)
 	}
 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 
-	while(read(fd, buff, BUFFER_SIZE) > 0)
+	while((read_return = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[BUFFER_SIZE] = '\0';
 		old_len = ft_strlen(main_str);
@@ -49,6 +52,25 @@ char	*get_next_line(int fd)
 	}
 
 	free(buff);
+	if(read_return == -1)
+		return (NULL);
+	if(read_return == 0)
+	{
+		old_len = ft_strlen(main_str);
+		if(old_len > 0)
+		{
+			to_return_str = malloc(old_len + 1);
+			ft_memcpy(to_return_str, main_str, old_len);
+			to_return_str[old_len] = '\0';
+			free(main_str);
+			return (to_return_str);
+		}
+		else
+		{
+			// free(main_str);
+			return (NULL);
+		}
+	}
 	if(ft_strlen(main_str) > 0)
 		return (main_str);
 	else
@@ -58,28 +80,38 @@ char	*get_next_line(int fd)
 	}
 }
 
-int	main(void)
-{
-	int		fd;
-	int		round;
-	char	*result;
+// int	main(void)
+// {
+// 	int		fd;
+// 	int		round;
+// 	char	*result;
 
-	fd = open("files/mypao", O_RDWR);
-	round = 1;
-	if(fd != -1)
-	{
-		while((result = get_next_line(fd)))
-		{
-			printf("%d. Line is %s*\n", round++, result);
-			free(result);
-		}
-	}
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	free(result);
-	// }
-	close(fd);
-	return (0);
-}
+// 	// fd = open("files/mypao", O_RDWR);
+// 	// fd = open("files/empty", O_RDWR);
+// 	// fd = open("files/nl", O_RDWR);
+// 	fd = open("files/41_no_nl", O_RDWR);
+// 	round = 1;
+// 	printf("fd is %d\n", fd);
+// 	if(fd != -1)
+// 	{
+// 		while((result = get_next_line(fd)))
+// 		{
+// 			printf("%d. Line is %s*\n", round++, result);
+// 			free(result);
+// 		}
+// 	}
+// 	// if(fd != -1)
+// 	// {
+// 	// 	result = get_next_line(fd);
+// 	// 	printf("%d. Line is %s*\n", round++, result);
+// 	// 	free(result);
+// 	// }
+// 	// if(fd != -1)
+// 	// {
+// 	// 	result = get_next_line(fd);
+// 	// 	printf("%d. Line is %s*\n", round++, result);
+// 	// 	free(result);
+// 	// }
+// 	close(fd);
+// 	return (0);
+// }

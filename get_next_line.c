@@ -20,6 +20,7 @@ char	*get_next_line(int fd)
 	static char	*main_str;
 	int			old_len;
 	char		*new_str;
+	char		*to_return_str;
 
 	main_str = (char *)malloc(1);
 	main_str[0] = '\0';
@@ -28,17 +29,29 @@ char	*get_next_line(int fd)
 	while(read(fd, buff, BUFFER_SIZE) > 0)
 	{
 		buff[BUFFER_SIZE] = '\0';
+		printf("Buffer is %s\n", buff);
+		printf("Main Str is %s\n", main_str);
 		old_len = ft_strlen(main_str);
+		printf("Old len is %d\n", old_len);
 		main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
+		
 		main_str[old_len] = '\0';
 		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
-
-		printf("main_str is %s\n", main_str);
+		printf("Main Str 2 is %s\n", main_str);
 		if(new_str = ft_strnstr(main_str, "\n", ft_strlen(main_str)))
 		{
-			printf("New str is %s", new_str + 1);
+			// printf("New str is %s", new_str + 1);
 
-			printf("Number is %ld\n", new_str - main_str);
+			// printf("Number is %ld\n", new_str - main_str);
+			to_return_str = malloc(new_str - main_str + 2);
+			// to_return_str[0] = '\0';
+
+			ft_memcpy(to_return_str, main_str, new_str - main_str + 1);
+			to_return_str[new_str - main_str + 1] = '\0';
+			printf("TO RETURN STR IS %s", to_return_str);
+			free(to_return_str);
+			ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
+			printf("Pao Main_str is %s\n", main_str);
 			printf("Found newline\n");
 		}
 		else
@@ -147,41 +160,41 @@ int	main(void)
 
 
 
-	// return_bytes = 0;
-	// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	// return_bytes = read(fd, buff, BUFFER_SIZE);
-	// if (return_bytes == 0)
-	// {
-	// 	free(buff);
-	// 	return (NULL);
-	// }
-	// buff[return_bytes] = '\0';
-	// main_str = (char *)malloc(1);
-	// main_str[0] = '\0';
+// return_bytes = 0;
+// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+// return_bytes = read(fd, buff, BUFFER_SIZE);
+// if (return_bytes == 0)
+// {
+// 	free(buff);
+// 	return (NULL);
+// }
+// buff[return_bytes] = '\0';
+// main_str = (char *)malloc(1);
+// main_str[0] = '\0';
 
-	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
-	// {
-	// 	old_len = ft_strlen(main_str);
-	// 	main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
-	// 	main_str[old_len] = '\0';
-		
-	// 	ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
+// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+// {
+// 	old_len = ft_strlen(main_str);
+// 	main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
+// 	main_str[old_len] = '\0';
+	
+// 	ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
 
-	// free(main_str);
+// free(main_str);
 
-	// free(buff);
-	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
-	// {
-	// 	printf("No Find Newline\n");
-	// 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	// 	return_bytes = read(fd, buff, BUFFER_SIZE);
-	// 	if(return_bytes == 0)
-	// 	{
-	// 		free(buff);
-	// 		return (NULL);
-	// 	}
-	// 	buff[return_bytes] = '\0';
-	// }
+// free(buff);
+// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+// {
+// 	printf("No Find Newline\n");
+// 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+// 	return_bytes = read(fd, buff, BUFFER_SIZE);
+// 	if(return_bytes == 0)
+// 	{
+// 		free(buff);
+// 		return (NULL);
+// 	}
+// 	buff[return_bytes] = '\0';
+// }
 
 
-	// return (buff);
+// return (buff);

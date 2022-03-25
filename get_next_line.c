@@ -26,19 +26,19 @@ char	*get_next_line(int fd)
 		free(buff);
 		return (NULL);
 	}
-	buff[return_bytes + 1] = '\0';
+	buff[return_bytes] = '\0';
 
 	printf("--- In get_next_line function\n");
 	printf("ft_strlen buff is %ld\n", ft_strlen(buff));
 
-	if(ft_strnstr(buff, "\n", ft_strlen(buff))
-	{
-		printf("Find newline\n");
-	}
-	else
-	{
-		printf("No Find Newline\n");
-	}
+	// if(ft_strnstr(buff, "\n", ft_strlen(buff)))
+	// {
+	// 	printf("Find newline\n");
+	// }
+	// else
+	// {
+	// 	printf("No Find Newline\n");
+	// }
 
 	return (buff);
 }

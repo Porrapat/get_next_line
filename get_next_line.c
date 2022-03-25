@@ -30,6 +30,15 @@ char	*get_next_line(int fd)
 	return (buff);
 }
 
+int	main(void)
+{
+
+
+	return (0);
+}
+
+
+
 // 1. Read แล้วต่อ String เรื่อยๆ จนกว่าเจอ \n แล้ว Return ออกอันนึง จากนั้น Read ต่ออีก
 // 1.1 เราต้องมีฟังก์ชันที่ใช้อะไรบ้าง
 
@@ -39,65 +48,60 @@ char	*get_next_line(int fd)
 // ft_strjoin ต่อสตริง ---> x ไม่ใช้
 // char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
-// ft_strlen()
-int	main(void)
-{
-	// Story 1
-	// int		fd;
-	// char	*result;
-	// int		round;
 
-	// fd = 0;
-	// fd = open("files/mypao", O_RDWR);
+// Story 1
+// int		fd;
+// char	*result;
+// int		round;
 
-	// round = 1;
-	// if(fd != -1)
-	// {
-	// 	while(result = get_next_line(fd))
-	// 	{
-	// 		printf("%d. Line is %s*", round++, result);
-	// 		free(result);
-	// 	}
-	// }
+// fd = 0;
+// fd = open("files/mypao", O_RDWR);
+
+// round = 1;
+// if(fd != -1)
+// {
+// 	while(result = get_next_line(fd))
+// 	{
+// 		printf("%d. Line is %s*", round++, result);
+// 		free(result);
+// 	}
+// }
 
 
-	// // Story 2
-	// int ret = 0;
-	// const char *src = "def";
-	// char *dst;
+// // Story 2
+// int ret = 0;
+// const char *src = "def";
+// char *dst;
 
-	// dst = (char *)malloc(4);
-	// dst[0] = 'a';
-	// dst[1] = 'b';
-	// dst[2] = 'c';
-	// dst[3] = '\0';
+// dst = (char *)malloc(4);
+// dst[0] = 'a';
+// dst[1] = 'b';
+// dst[2] = 'c';
+// dst[3] = '\0';
 
-	// int old_len = ft_strlen(dst);
-	// dst = ft_realloc(dst, ft_strlen(src) + ft_strlen(dst) + 1);
-	// dst[old_len] = '\0';
-	
-	// ret = ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
-	// printf("dst is %s\n", dst);
-	// printf("ret is %d\n", ret);
-	// free(dst);
+// int old_len = ft_strlen(dst);
+// dst = ft_realloc(dst, ft_strlen(src) + ft_strlen(dst) + 1);
+// dst[old_len] = '\0';
 
-	// // Story 3
-	// char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+// ret = ft_strlcat(dst, src, ft_strlen(src) + ft_strlen(dst) + 1);
+// printf("dst is %s\n", dst);
+// printf("ret is %d\n", ret);
+// free(dst);
 
-	const char *myhay = "abcde\ndef\nghijk";
+// // Story 3
+// char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
-	// char *myhay;
-	// myhay = (char *)malloc(16);
-	// ft_memcpy(myhay, "abcde\ndef\nghijk", 16);
+// const char *myhay = "abcde\ndef\nghijk";
 
-	char *temp;
+// // char *myhay;
+// // myhay = (char *)malloc(16);
+// // ft_memcpy(myhay, "abcde\ndef\nghijk", 16);
 
-	printf("%s---", myhay);
+// char *temp;
 
-	temp = ft_strnstr(myhay, "\n", ft_strlen(myhay));
-	
-	printf("%s", temp);
-	// free(myhay);
+// // printf("%s---", myhay);
 
-	return (0);
-}
+// temp = ft_strnstr(myhay, "\n", ft_strlen(myhay));
+// printf("+%s+", myhay);
+// printf("+%s+", temp+1);
+// // free(myhay);

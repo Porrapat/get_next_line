@@ -15,33 +15,78 @@
 
 char	*get_next_line(int fd)
 {
-	char	*buff;
-	int		return_bytes;
+	char		*buff;
+	int			return_bytes;
+	char	*main_str;
+	int			old_len;
 
-	return_bytes = 0;
+	main_str = (char *)malloc(1);
+	main_str[0] = '\0';
 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	return_bytes = read(fd, buff, BUFFER_SIZE);
-	if(return_bytes == 0)
-	{
-		free(buff);
-		return (NULL);
-	}
-	buff[return_bytes] = '\0';
 
-	printf("--- In get_next_line function\n");
-	printf("buff is %s", buff);
-	printf("ft_strlen buff is %ld\n", ft_strlen(buff));
-
-	if(ft_strnstr(buff, "\n", ft_strlen(buff)))
+	while(read(fd, buff, BUFFER_SIZE) > 0)
 	{
-		printf("Find newline\n");
+		buff[BUFFER_SIZE] = '\0';
+
+		old_len = ft_strlen(main_str);
+		printf("old_len is %d\n", old_len);
+		// ft_strlen(buff);
+		main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
+		main_str[old_len] = '\0';
+		
+		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
+
+		printf("-----\n");
 	}
+
+	free(buff);
+	if(ft_strlen(main_str) > 0)
+		return (main_str);
 	else
 	{
-		printf("No Find Newline\n");
+		free(main_str);
+		return (NULL);
 	}
+		
 
-	return (buff);
+	// return_bytes = 0;
+	// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	// return_bytes = read(fd, buff, BUFFER_SIZE);
+	// if (return_bytes == 0)
+	// {
+	// 	free(buff);
+	// 	return (NULL);
+	// }
+	// buff[return_bytes] = '\0';
+	// main_str = (char *)malloc(1);
+	// main_str[0] = '\0';
+
+	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+	// {
+	// 	old_len = ft_strlen(main_str);
+	// 	main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
+	// 	main_str[old_len] = '\0';
+		
+	// 	ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
+
+	// free(main_str);
+
+	// free(buff);
+	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+	// {
+	// 	printf("No Find Newline\n");
+	// 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	// 	return_bytes = read(fd, buff, BUFFER_SIZE);
+	// 	if(return_bytes == 0)
+	// 	{
+	// 		free(buff);
+	// 		return (NULL);
+	// 	}
+	// 	buff[return_bytes] = '\0';
+	// }
+
+
+	// return (buff);
 }
 
 int	main(void)

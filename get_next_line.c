@@ -57,12 +57,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if(read_return == 0)
 	{
-		// if(main_str)
-		// {
-		// 	free(main_str);
-		// 	main_str = NULL;
-		// 	return (NULL);
-		// }
 		old_len = ft_strlen(main_str);
 		if(old_len > 0)
 		{

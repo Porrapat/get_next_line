@@ -56,6 +56,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if(read_return == 0)
 	{
+		if(main_str)
+			return (NULL);
 		old_len = ft_strlen(main_str);
 		if(old_len > 0)
 		{
@@ -89,7 +91,8 @@ char	*get_next_line(int fd)
 // 	// fd = open("files/mypao", O_RDWR);
 // 	// fd = open("files/empty", O_RDWR);
 // 	// fd = open("files/nl", O_RDWR);
-// 	fd = open("files/41_no_nl", O_RDWR);
+// 	// fd = open("files/41_no_nl", O_RDWR);
+// 	fd = open("files/41_with_nl", O_RDWR);
 // 	round = 1;
 // 	printf("fd is %d\n", fd);
 // 	if(fd != -1)

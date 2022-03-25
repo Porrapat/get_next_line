@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 {
 	char		*buff;
 	int			return_bytes;
-	char	*main_str;
+	static char	*main_str;
 	int			old_len;
 
 	main_str = (char *)malloc(1);
@@ -27,15 +27,16 @@ char	*get_next_line(int fd)
 	while(read(fd, buff, BUFFER_SIZE) > 0)
 	{
 		buff[BUFFER_SIZE] = '\0';
-
 		old_len = ft_strlen(main_str);
-		printf("old_len is %d\n", old_len);
-		// ft_strlen(buff);
 		main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
 		main_str[old_len] = '\0';
-		
 		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
 
+		printf("main_str is %s\n", main_str);
+		if(ft_strnstr(main_str, "\n", ft_strlen(main_str)))
+			printf("Found newline\n");
+		else
+			printf("No Found newline\n");
 		printf("-----\n");
 	}
 

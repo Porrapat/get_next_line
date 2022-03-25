@@ -19,6 +19,7 @@ char	*get_next_line(int fd)
 	int			return_bytes;
 	static char	*main_str;
 	int			old_len;
+	char		*new_str;
 
 	main_str = (char *)malloc(1);
 	main_str[0] = '\0';
@@ -33,8 +34,13 @@ char	*get_next_line(int fd)
 		ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
 
 		printf("main_str is %s\n", main_str);
-		if(main_str = ft_strnstr(main_str, "\n", ft_strlen(main_str)))
+		if(new_str = ft_strnstr(main_str, "\n", ft_strlen(main_str)))
+		{
+			printf("New str is %s", new_str + 1);
+
+			printf("Number is %ld\n", new_str - main_str);
 			printf("Found newline\n");
+		}
 		else
 			printf("No Found newline\n");
 		printf("-----\n");
@@ -48,46 +54,6 @@ char	*get_next_line(int fd)
 		free(main_str);
 		return (NULL);
 	}
-		
-
-	// return_bytes = 0;
-	// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	// return_bytes = read(fd, buff, BUFFER_SIZE);
-	// if (return_bytes == 0)
-	// {
-	// 	free(buff);
-	// 	return (NULL);
-	// }
-	// buff[return_bytes] = '\0';
-	// main_str = (char *)malloc(1);
-	// main_str[0] = '\0';
-
-	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
-	// {
-	// 	old_len = ft_strlen(main_str);
-	// 	main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
-	// 	main_str[old_len] = '\0';
-		
-	// 	ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
-
-	// free(main_str);
-
-	// free(buff);
-	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
-	// {
-	// 	printf("No Find Newline\n");
-	// 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
-	// 	return_bytes = read(fd, buff, BUFFER_SIZE);
-	// 	if(return_bytes == 0)
-	// 	{
-	// 		free(buff);
-	// 		return (NULL);
-	// 	}
-	// 	buff[return_bytes] = '\0';
-	// }
-
-
-	// return (buff);
 }
 
 int	main(void)
@@ -178,3 +144,44 @@ int	main(void)
 // printf("+%s+", myhay);
 // printf("+%s+", temp+1);
 // // free(myhay);
+
+
+
+	// return_bytes = 0;
+	// buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	// return_bytes = read(fd, buff, BUFFER_SIZE);
+	// if (return_bytes == 0)
+	// {
+	// 	free(buff);
+	// 	return (NULL);
+	// }
+	// buff[return_bytes] = '\0';
+	// main_str = (char *)malloc(1);
+	// main_str[0] = '\0';
+
+	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+	// {
+	// 	old_len = ft_strlen(main_str);
+	// 	main_str = ft_realloc(main_str, ft_strlen(buff) + ft_strlen(main_str) + 1);
+	// 	main_str[old_len] = '\0';
+		
+	// 	ft_strlcat(main_str, buff, ft_strlen(buff) + ft_strlen(main_str) + 1);
+
+	// free(main_str);
+
+	// free(buff);
+	// while(ft_strnstr(buff, "\n", ft_strlen(buff) == NULL))
+	// {
+	// 	printf("No Find Newline\n");
+	// 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	// 	return_bytes = read(fd, buff, BUFFER_SIZE);
+	// 	if(return_bytes == 0)
+	// 	{
+	// 		free(buff);
+	// 		return (NULL);
+	// 	}
+	// 	buff[return_bytes] = '\0';
+	// }
+
+
+	// return (buff);

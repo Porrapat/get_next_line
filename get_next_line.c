@@ -12,6 +12,17 @@
 
 #include "get_next_line.h"
 
+char	*get_in_to_return_str(char *new_str, char *main_str)
+{
+	char		*in_to_return_str;
+
+	in_to_return_str = (char *)malloc(new_str - main_str + 2);
+	ft_memcpy(in_to_return_str, main_str, new_str - main_str + 1);
+	in_to_return_str[new_str - main_str + 1] = '\0';
+	ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
+	return (in_to_return_str);
+}
+
 char	*make_main_str(int fd, int *read_return, char buff[])
 {
 	static char	*main_str;
@@ -30,11 +41,8 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 		new_str = ft_strnstr(main_str, "\n", old_len + 1);
 		if (new_str)
 		{
-			in_to_return_str = malloc(new_str - main_str + 2);
-			ft_memcpy(in_to_return_str, main_str, new_str - main_str + 1);
-			in_to_return_str[new_str - main_str + 1] = '\0';
-			ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
 			free(buff);
+			in_to_return_str = get_in_to_return_str(new_str, main_str);
 			return (in_to_return_str);
 		}
 		*read_return = read(fd, buff, BUFFER_SIZE);

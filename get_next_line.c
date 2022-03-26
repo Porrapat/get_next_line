@@ -27,7 +27,7 @@ static char	*get_in_to_return_str(char *new_str, char *main_str)
 
 static char	*make_main_str(int fd, int *read_return, char buff[])
 {
-	static char	*main_str;
+	static char	*main_str = "";
 	char		*in_to_return_str;
 	int			old_len;
 	char		*new_str;

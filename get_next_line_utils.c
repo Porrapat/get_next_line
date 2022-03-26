@@ -24,24 +24,23 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char		*dstc;
-	const char	*srccc;
-	size_t		i;
+	char	*d;
+	char	*s;
 
-	if ((dst == src) || n == 0)
+	d = (char *)dst;
+	s = (char *)src;
+	if (dst == src)
 		return (dst);
-	if (!dst && !src)
-		return (0);
-	dstc = (char *)dst;
-	srccc = (const char *)src;
-	i = 0;
-	while (i < n)
+	if (s < d)
 	{
-		dstc[i] = srccc[i];
-		i++;
+		while (len--)
+			*(d + len) = *(s + len);
+		return (dst);
 	}
+	while (len--)
+		*d++ = *s++;
 	return (dst);
 }
 
@@ -52,7 +51,7 @@ char	*ft_realloc(char *s, size_t n)
 	res = (char *)malloc(n * sizeof(char));
 	if (!res)
 		return (NULL);
-	res = ft_memcpy(res, s, ft_strlen(s));
+	res = ft_memmove(res, s, ft_strlen(s));
 	free(s);
 	return (res);
 }

@@ -44,43 +44,32 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char	*ft_realloc(char *s, size_t n)
-{
-	char	*res;
-
-	res = (char *)malloc(n * sizeof(char));
-	if (!res)
-		return (NULL);
-	res = ft_memmove(res, s, ft_strlen(s));
-	free(s);
-	return (res);
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+char	*ft_strmycat(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
-	size_t	src_len;
-	size_t	dst_len;
+	char	*str;
 
-	j = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	i = dst_len;
-	if (dstsize == 0)
-		return (src_len);
-	if (dstsize < dst_len)
-		return (src_len + dstsize);
-	else
+	if (!s1)
 	{
-		while (src[j] && (dst_len + j) < dstsize)
-			dst[i++] = src[j++];
-		if ((dst_len + j) == dstsize && dst_len < dstsize)
-			dst[--i] = '\0';
-		else
-			dst[i] = '\0';
-		return (src_len + dst_len);
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
 	}
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	j = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (str);
 }
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)

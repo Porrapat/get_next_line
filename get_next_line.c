@@ -13,17 +13,35 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+static char	*check_newline_in_str(char *left_str)
+{
+	char	*ret;
+	size_t	len;
+	if (left_str == NULL)
+	{
+		len = 0;
+		ret = NULL;
+	}
+	else
+	{
+		len = ft_strlen(left_str);
+		ret = ft_strnstr(left_str, "\n", len);
+	}
+	return (ret);
+}
+
 static char	*get_next_line_main_logic(int fd, char *main_str)
 {
 	char	*buff;
 	int		rd_bytes;
+	char	*ret;
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
 	rd_bytes = 1;
-	// while (!ft_strchr(main_str, '\n') && rd_bytes != 0)
-	while (!ft_strnstr(main_str, "\n", ft_strlen(main_str)) && rd_bytes != 0)
+	ret = check_newline_in_str(main_str);
+	while (!ret && rd_bytes != 0)
 	{
 		rd_bytes = read(fd, buff, BUFFER_SIZE);
 		if (rd_bytes == -1)
@@ -32,8 +50,8 @@ static char	*get_next_line_main_logic(int fd, char *main_str)
 			return (NULL);
 		}
 		buff[rd_bytes] = '\0';
-		// main_str = ft_strjoin(main_str, buff);
-		ft_strlcat(main_str, buff, ft_strlen(main_str) + ft_strlen(buff) + 1);
+		main_str = ft_strmycat(main_str, buff);
+		ret = check_newline_in_str(main_str);
 	}
 	free(buff);
 	return (main_str);
@@ -93,13 +111,12 @@ char	*get_new_main_str(char *main_str)
 	return (str);
 }
 
-
 char	*get_next_line(int fd)
 {
-	static char	*main_str = "";
+	static char	*main_str;
 	char		*to_return_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 2048)
 		return (NULL);
 	main_str = get_next_line_main_logic(fd, main_str);
 	if (!main_str)

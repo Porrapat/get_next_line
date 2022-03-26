@@ -13,20 +13,20 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-static char	*check_newline_in_str(char *left_str)
+static char	*check_newline_in_str(char *main_str)
 {
 	char	*ret;
 	size_t	len;
 
-	if (left_str == NULL)
+	if (main_str == NULL)
 	{
 		len = 0;
 		ret = NULL;
 	}
 	else
 	{
-		len = ft_strlen(left_str);
-		ret = ft_strnstr(left_str, "\n", len);
+		len = ft_strlen(main_str);
+		ret = ft_strnstr(main_str, "\n", len);
 	}
 	return (ret);
 }

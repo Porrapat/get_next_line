@@ -17,6 +17,7 @@ static char	*check_newline_in_str(char *left_str)
 {
 	char	*ret;
 	size_t	len;
+
 	if (left_str == NULL)
 	{
 		len = 0;
@@ -121,6 +122,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	to_return_line = get_to_return_line_from_main_str(main_str);
 	main_str = get_new_main_str(main_str);
-
 	return (to_return_line);
 }

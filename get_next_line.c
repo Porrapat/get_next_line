@@ -15,11 +15,13 @@
 static char	*get_in_to_return_str(char *new_str, char *main_str)
 {
 	char		*in_to_return_str;
+	int			len;
 
 	in_to_return_str = (char *)malloc(new_str - main_str + 2);
 	ft_memcpy(in_to_return_str, main_str, new_str - main_str + 1);
 	in_to_return_str[new_str - main_str + 1] = '\0';
-	ft_memcpy(main_str, new_str + 1, ft_strlen(new_str));
+	len = ft_strlen(new_str);
+	ft_memcpy(main_str, new_str + 1, len);
 	return (in_to_return_str);
 }
 

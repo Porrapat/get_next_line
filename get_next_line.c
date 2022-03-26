@@ -39,6 +39,7 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 		}
 		*read_return = read(fd, buff, BUFFER_SIZE);
 	}
+	return (NULL);
 }
 
 char	*check_for_read_return(int *read_return)
@@ -58,14 +59,12 @@ char	*check_for_read_return(int *read_return)
 			free(main_str);
 			return (new_new_str);
 		}
-		else
-			return (NULL);
 	}
+	return (NULL);
 }
 
 char	*get_next_line_main_logic(int fd)
 {
-	static char	*main_str;
 	char		*buff;
 	int			read_return;
 	char		*new_str;
@@ -102,7 +101,6 @@ char	*get_next_line(int fd)
 	return (to_return_str);
 }
 
-/*
 int	main(void)
 {
 	int		fd;
@@ -148,4 +146,3 @@ int	main(void)
 	close(fd);
 	return (0);
 }
-*/

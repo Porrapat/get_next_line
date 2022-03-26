@@ -14,9 +14,17 @@
 
 static char	*make_result_str(int fd)
 {
-	if (fd)
+	static char	*main_str = "Pao\nIs\nSmart\n";
+	char *result_str;
+
+	result_str = malloc(ft_strlen(main_str) + 1);
+	ft_memmove(result_str, main_str, ft_strlen(main_str) + 1);
+	if (fd == -1)
 		return (NULL);
+	
+	free(result_str);
 	return (NULL);
+	// return (result_str);
 }
 
 static char	*get_next_line_main_logic(int fd)

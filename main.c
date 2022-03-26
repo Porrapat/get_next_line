@@ -39,8 +39,16 @@ int	main(void)
 			result = get_next_line(fd);
 
 			if (round == 100)
+			{
+				if(result)
+				{
+					free(result);
+					result = NULL;
+				}
 				break;
+			}
 		}
+
 	}
 	close(fd);
 	return (0);

@@ -38,7 +38,7 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 		main_str = ft_realloc(main_str, *read_return + old_len + 1);
 		main_str[old_len] = '\0';
 		ft_strlcat(main_str, buff, *read_return + old_len + 1);
-		new_str = ft_strnstr(main_str, "\n", old_len + 1);
+		new_str = ft_strnstr(main_str, "\n", ft_strlen(main_str));
 		if (new_str)
 		{
 			free(buff);
@@ -73,6 +73,7 @@ char	*check_for_read_return(int *read_return)
 
 char	*get_next_line_main_logic(int fd)
 {
+	static char	*main_str;
 	char		*buff;
 	int			read_return;
 	char		*new_str;
@@ -115,20 +116,22 @@ int	main(void)
 	int		round;
 	char	*result;
 
-	fd = open("files/mypao", O_RDWR);
+	// fd = open("files/mypao", O_RDWR);
 	// fd = open("files/empty", O_RDWR);
 	// fd = open("files/nl", O_RDWR);
-	// fd = open("files/41_no_nl", O_RDWR);
+	fd = open("files/41_no_nl", O_RDWR);
 	// fd = open("files/41_with_nl", O_RDWR);
 	round = 1;
 	printf("fd is %d\n", fd);
 	if(fd != -1)
 	{
-		while((result = get_next_line(fd)))
+		result = get_next_line(fd);
+		while (result)
 		{
 			printf("%d. Line is %s*\n", round++, result);
 			free(result);
 			result = NULL;
+			result = get_next_line(fd);
 		}
 	}
 	// if(fd != -1)

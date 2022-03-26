@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*get_in_to_return_str(char *new_str, char *main_str)
+static char	*get_in_to_return_str(char *new_str, char *main_str)
 {
 	char		*in_to_return_str;
 
@@ -23,7 +23,7 @@ char	*get_in_to_return_str(char *new_str, char *main_str)
 	return (in_to_return_str);
 }
 
-char	*make_main_str(int fd, int *read_return, char buff[])
+static char	*make_main_str(int fd, int *read_return, char buff[])
 {
 	static char	*main_str;
 	char		*in_to_return_str;
@@ -47,12 +47,11 @@ char	*make_main_str(int fd, int *read_return, char buff[])
 		}
 		*read_return = read(fd, buff, BUFFER_SIZE);
 	}
-	return (NULL);
+	return (main_str);
 }
 
-char	*check_for_read_return(int *read_return)
+static char	*check_for_read_return(int *read_return, char *main_str)
 {
-	static char	*main_str;
 	char		*new_new_str;
 
 	if (*read_return == -1)
@@ -71,9 +70,9 @@ char	*check_for_read_return(int *read_return)
 	return (NULL);
 }
 
-char	*get_next_line_main_logic(int fd)
+static char	*get_next_line_main_logic(int fd)
 {
-	static char	*main_str;
+	char		*main_str;
 	char		*buff;
 	int			read_return;
 	char		*new_str;
@@ -87,7 +86,7 @@ char	*get_next_line_main_logic(int fd)
 		free(buff);
 		return (NULL);
 	}
-	new_str = check_for_read_return(&read_return);
+	new_str = check_for_read_return(&read_return, new_str);
 	if (new_str)
 		return (new_str);
 	else
@@ -96,30 +95,25 @@ char	*get_next_line_main_logic(int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*main_str;
 	char		*to_return_str;
 
 	if (fd == -1 || BUFFER_SIZE == 0)
 		return (NULL);
-	if (!main_str)
-	{
-		main_str = (char *)malloc(1);
-		main_str[0] = '\0';
-	}
 	to_return_str = get_next_line_main_logic(fd);
 	return (to_return_str);
 }
 
+/*
 int	main(void)
 {
 	int		fd;
 	int		round;
 	char	*result;
 
-	// fd = open("files/mypao", O_RDWR);
+	fd = open("files/mypao", O_RDWR);
 	// fd = open("files/empty", O_RDWR);
 	// fd = open("files/nl", O_RDWR);
-	fd = open("files/41_no_nl", O_RDWR);
+	// fd = open("files/41_no_nl", O_RDWR);
 	// fd = open("files/41_with_nl", O_RDWR);
 	round = 1;
 	printf("fd is %d\n", fd);
@@ -132,6 +126,9 @@ int	main(void)
 			free(result);
 			result = NULL;
 			result = get_next_line(fd);
+
+			if (round == 100)
+				break;
 		}
 	}
 	// if(fd != -1)
@@ -157,3 +154,4 @@ int	main(void)
 	close(fd);
 	return (0);
 }
+*/

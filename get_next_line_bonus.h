@@ -21,7 +21,6 @@
 # endif
 
 size_t		ft_strlen(const char *s);
-void		*ft_memmove(void *dst, const void *src, size_t len);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_strmycat(char *s1, char *s2);
 char		*get_next_line(int fd);

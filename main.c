@@ -20,8 +20,8 @@ int	main(void)
 	int		round;
 	char	*result;
 
-	fd = open("files/mypao", O_RDWR);
-	// fd = open("files/empty", O_RDWR);
+	// fd = open("files/mypao", O_RDWR);
+	fd = open("files/empty", O_RDWR);
 	// fd = open("files/nl", O_RDWR);
 	// fd = open("files/41_no_nl", O_RDWR);
 	// fd = open("files/41_with_nl", O_RDWR);
@@ -42,26 +42,27 @@ int	main(void)
 				break;
 		}
 	}
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	if(result)
-	// 	{
-	// 		free(result);
-	// 		result = NULL;
-	// 	}
-	// }
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	if(result != NULL)
-	// 	{
-	// 		free(result);
-	// 		result = NULL;
-	// 	}
-	// }
 	close(fd);
 	return (0);
 }
+
+// if(fd != -1)
+// {
+// 	result = get_next_line(fd);
+// 	printf("%d. Line is %s*\n", round++, result);
+// 	if(result)
+// 	{
+// 		free(result);
+// 		result = NULL;
+// 	}
+// }
+// if(fd != -1)
+// {
+// 	result = get_next_line(fd);
+// 	printf("%d. Line is %s*\n", round++, result);
+// 	if(result != NULL)
+// 	{
+// 		free(result);
+// 		result = NULL;
+// 	}
+// }

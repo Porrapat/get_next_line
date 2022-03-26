@@ -12,6 +12,21 @@
 
 #include "get_next_line.h"
 
+static char	*make_result_str(int fd)
+{
+	if (fd)
+		return (NULL);
+	return (NULL);
+}
+
+static char	*get_next_line_main_logic(int fd)
+{
+	char	*result_str;
+
+	result_str = make_result_str(fd);
+	return (result_str);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*to_return_str;

@@ -13,10 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <stdlib.h>
-// Before Send Must Delete Out
-# include <fcntl.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE

@@ -47,7 +47,9 @@ static char	*make_main_str(int fd, int *read_return, char buff[])
 		}
 		*read_return = read(fd, buff, BUFFER_SIZE);
 	}
-	return (main_str);
+	if (main_str && ft_strlen(main_str) != 0)
+		return (main_str);
+	return (NULL);
 }
 
 static char	*check_for_read_return(int *read_return, char *main_str)
@@ -72,7 +74,6 @@ static char	*check_for_read_return(int *read_return, char *main_str)
 
 static char	*get_next_line_main_logic(int fd)
 {
-	char		*main_str;
 	char		*buff;
 	int			read_return;
 	char		*new_str;
@@ -102,56 +103,3 @@ char	*get_next_line(int fd)
 	to_return_str = get_next_line_main_logic(fd);
 	return (to_return_str);
 }
-
-/*
-int	main(void)
-{
-	int		fd;
-	int		round;
-	char	*result;
-
-	fd = open("files/mypao", O_RDWR);
-	// fd = open("files/empty", O_RDWR);
-	// fd = open("files/nl", O_RDWR);
-	// fd = open("files/41_no_nl", O_RDWR);
-	// fd = open("files/41_with_nl", O_RDWR);
-	round = 1;
-	printf("fd is %d\n", fd);
-	if(fd != -1)
-	{
-		result = get_next_line(fd);
-		while (result)
-		{
-			printf("%d. Line is %s*\n", round++, result);
-			free(result);
-			result = NULL;
-			result = get_next_line(fd);
-
-			if (round == 100)
-				break;
-		}
-	}
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	if(result)
-	// 	{
-	// 		free(result);
-	// 		result = NULL;
-	// 	}
-	// }
-	// if(fd != -1)
-	// {
-	// 	result = get_next_line(fd);
-	// 	printf("%d. Line is %s*\n", round++, result);
-	// 	if(result != NULL)
-	// 	{
-	// 		free(result);
-	// 		result = NULL;
-	// 	}
-	// }
-	close(fd);
-	return (0);
-}
-*/

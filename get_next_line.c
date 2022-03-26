@@ -13,44 +13,99 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-static char	*make_result_str(int fd)
+static char	*get_next_line_main_logic(int fd, char *main_str)
 {
-	static char	main_str[] = "1";
-	char *result_str;
-	char *pao_str = "23";
+	char	*buff;
+	int		rd_bytes;
 
-	result_str = malloc(ft_strlen(main_str) + 1);
-	ft_memmove(result_str, main_str, ft_strlen(main_str) + 1);
-	if (fd == -1)
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
 		return (NULL);
-
-	// // main_str = pao_str;
-	// ft_strlen(main_str);
-	// ft_strlen(pao_str);
-	ft_strlcat(main_str, pao_str, ft_strlen(main_str) + ft_strlen(pao_str) + 1);
-	
-	// printf("----- In make_result_str -----\n");
-	// printf("main_str = %s\n", main_str);
-	
-	// free(result_str);
-	// return (NULL);
-	return (result_str);
+	rd_bytes = 1;
+	// while (!ft_strchr(main_str, '\n') && rd_bytes != 0)
+	while (!ft_strnstr(main_str, "\n", ft_strlen(main_str)) && rd_bytes != 0)
+	{
+		rd_bytes = read(fd, buff, BUFFER_SIZE);
+		if (rd_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[rd_bytes] = '\0';
+		// main_str = ft_strjoin(main_str, buff);
+		ft_strlcat(main_str, buff, ft_strlen(main_str) + ft_strlen(buff) + 1);
+	}
+	free(buff);
+	return (main_str);
 }
 
-static char	*get_next_line_main_logic(int fd)
+static char	*get_to_return_line_from_main_str(char *main_str)
 {
-	char	*result_str;
+	int		i;
+	char	*str;
 
-	result_str = make_result_str(fd);
-	return (result_str);
+	i = 0;
+	if (!main_str[i])
+		return (NULL);
+	while (main_str[i] && main_str[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (main_str[i] && main_str[i] != '\n')
+	{
+		str[i] = main_str[i];
+		i++;
+	}
+	if (main_str[i] == '\n')
+	{
+		str[i] = main_str[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
+
+char	*get_new_main_str(char *main_str)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	while (main_str[i] && main_str[i] != '\n')
+		i++;
+	if (!main_str[i])
+	{
+		free(main_str);
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * (ft_strlen(main_str) - i));
+	if (!str)
+		return (NULL);
+	i++;
+	j = 0;
+	while (main_str[i])
+		str[j++] = main_str[i++];
+	str[j] = '\0';
+	free(main_str);
+	return (str);
+}
+
 
 char	*get_next_line(int fd)
 {
-	char		*to_return_str;
+	static char	*main_str = "";
+	char		*to_return_line;
 
-	if (fd == -1 || BUFFER_SIZE == 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	to_return_str = get_next_line_main_logic(fd);
-	return (to_return_str);
+	main_str = get_next_line_main_logic(fd, main_str);
+	if (!main_str)
+		return (NULL);
+	to_return_line = get_to_return_line_from_main_str(main_str);
+	main_str = get_new_main_str(main_str);
+
+	return (to_return_line);
 }

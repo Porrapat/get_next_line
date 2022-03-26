@@ -20,8 +20,8 @@ int	main(void)
 	int		round;
 	char	*result;
 
-	// fd = open("files/mypao", O_RDWR);
-	fd = open("files/empty", O_RDWR);
+	fd = open("files/mypao", O_RDWR);
+	// fd = open("files/empty", O_RDWR);
 	// fd = open("files/nl", O_RDWR);
 	// fd = open("files/41_no_nl", O_RDWR);
 	// fd = open("files/41_with_nl", O_RDWR);

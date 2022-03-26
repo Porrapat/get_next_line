@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppetchda <ppetchda@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                              +#+#+#+#+#+     +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*check_newline_in_str(char *main_str)
 {
@@ -111,15 +111,15 @@ char	*get_new_main_str(char *main_str)
 
 char	*get_next_line(int fd)
 {
-	static char	*main_str;
+	static char	*main_str[4096];
 	char		*to_return_line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	main_str = get_next_line_main_logic(fd, main_str);
-	if (!main_str)
+	main_str[fd] = get_next_line_main_logic(fd, main_str[fd]);
+	if (!main_str[fd])
 		return (NULL);
-	to_return_line = get_to_return_line_from_main_str(main_str);
-	main_str = get_new_main_str(main_str);
+	to_return_line = get_to_return_line_from_main_str(main_str[fd]);
+	main_str[fd] = get_new_main_str(main_str[fd]);
 	return (to_return_line);
 }

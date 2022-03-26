@@ -2,6 +2,9 @@ norminette:
 	norminette get_next_line.h
 	norminette get_next_line.c
 	norminette get_next_line_utils.c
+	norminette get_next_line_bonus.h
+	norminette get_next_line_bonus.c
+	norminette get_next_line_utils_bonus.c
 
 run:
 	gcc -g -Wall -Wextra -Werror -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c && ./a.out

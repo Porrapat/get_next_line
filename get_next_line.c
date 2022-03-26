@@ -102,8 +102,10 @@ char	*get_new_main_str(char *main_str)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(main_str) - i));
 	if (!str)
 		return (NULL);
-	j = ft_strlen(main_str + i) - 1;
-	ft_memmove(str, main_str + i, j);
+	i++;
+	j = 0;
+	while (main_str[i])
+		str[j++] = main_str[i++];
 	str[j] = '\0';
 	free(main_str);
 	return (str);

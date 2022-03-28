@@ -85,7 +85,7 @@ static char	*get_to_return_line_from_main_str(char *main_str)
 	return (str);
 }
 
-char	*get_new_main_str(char *main_str)
+static char	*get_new_main_str(char *main_str)
 {
 	int		i;
 	int		j;
